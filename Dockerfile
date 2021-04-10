@@ -20,6 +20,11 @@ RUN apt-get update \
 anydesk libpolkit-gobject-1-0 \
 locales tzdata \
 lsb-release pciutils \
+; exit 0 \
+&& chmod -R 755 /usr/share/anydesk \
+&& chmod 755 /var/lib/dpkg/info/anydesk.p* \
+&& dpkg --configure anydesk \
+&& apt-get install -f \
 && apt-get update \
 && apt-get upgrade -y \
 && apt-get remove -fy \
