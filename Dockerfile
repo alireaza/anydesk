@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -12,8 +12,8 @@ wget ca-certificates gnupg2 \
 && apt-get autoremove -y \
 && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
-RUN wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
-RUN printf "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk.list
+RUN wget -O- https://keys.anydesk.com/repos/DEB-GPG-KEY | gpg --dearmor > /usr/share/keyrings/anydesk-archive-keyring.gpg
+RUN printf "deb [signed-by=/usr/share/keyrings/anydesk-archive-keyring.gpg] http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk.list
 
 RUN apt-get update \
 && apt-get install -y --no-install-recommends \

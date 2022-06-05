@@ -1,5 +1,5 @@
 Build:
-docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) -t alireaza/anydesk .
+docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --tag alireaza/anydesk:$(date -u +%Y%m%d) --tag alireaza/anydesk .
 
 Run:
 docker run \
