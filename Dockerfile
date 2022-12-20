@@ -16,21 +16,10 @@ RUN wget -O- https://keys.anydesk.com/repos/DEB-GPG-KEY | gpg --dearmor > /usr/s
 RUN printf "deb [signed-by=/usr/share/keyrings/anydesk-archive-keyring.gpg] http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk.list
 
 RUN apt-get update \
-&& apt-get install -y --no-install-recommends \
+&& apt-get install -y \
 anydesk libpolkit-gobject-1-0 \
-locales tzdata \
 lsb-release pciutils \
-; exit 0 \
-&& chmod -R 755 /usr/share/anydesk \
-&& chmod 755 /var/lib/dpkg/info/anydesk.p* \
-&& dpkg --configure anydesk \
-&& apt-get install -f \
-&& apt-get update \
-&& apt-get upgrade -y \
-&& apt-get remove -fy \
-&& apt-get autoclean -y \
-&& apt-get autoremove -y \
-&& rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
+libpango1.0-0 pulseaudio ffmpeg libsm6 libxext6 dbus-x11 tzdata
 
 ARG UNAME=udocker
 ARG UID=1000
